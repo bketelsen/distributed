@@ -59,7 +59,7 @@ The `src` directory of this repo is available inside the VM as `/home/vagrant/sr
 ### Testing Vagrant Setup
 
 	vagrant ssh
-	go build hello
+	go install hello
 
 This should compile the `hello/main.go` file at `/home/vagrant/src/hello/main.go`
 
@@ -77,7 +77,6 @@ Local setup requires that the GOPATH be set to the root of this repository:
 
 Test this by building the `hello` package:
 
-	go build hello
 	go install hello
 
 Building packages and binaries will put compiled output in the `bin` and `pkg` directories.  
