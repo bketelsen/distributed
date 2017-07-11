@@ -36,9 +36,6 @@ If you are using Vagrant/Virtualbox, you need to install VirtualBox first, then 
 
 If you have Go 1.8 installed, you'll need to set your GOPATH to the root of this repository.  You can do that manually, or use `direnv`. I strongly recommend using `direnv`!  See below for instructions.
 
-
-
-
 ## Local Setup
 
 Local setup requires that the GOPATH be set to the root of this repository:
@@ -56,6 +53,11 @@ Add `bin` to your PATH:
 	export PATH=`pwd`:$PATH
 
 Test this by running `hello`.
+
+Install the `dep` tool and put it in your path.
+
+	go get -u github.com/golang/dep/cmd/dep
+
 
 There is an `environment.sh` file in the root of the course directory that will setup your GOPATH for
 the current terminal session if you type:
