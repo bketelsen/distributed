@@ -6,8 +6,7 @@ me@brianketelsen.com
 
 * Distributed Communication
 
-- Development Servers
-- Introductions
+- Development Setup
 - Methods of communicating between applications
 - Transport and encoding options
 
@@ -27,6 +26,7 @@ In the message queue pattern, a service on the network sends a message on a queu
 - RabbitMQ
 - NATS
 - NSQ
+- Cloud Vendor (Amazon SQS & similar)
 - countless others
 
 * Message Queue Pros/Cons
@@ -62,10 +62,11 @@ This example service has an interface for serving the content that accepts a `ne
 
 * RPC
 
-There are many flavors of RPC, and the choice you make depends on the consumers of your service and what they can support.  
+There are many flavors of RPC, and the choice you make depends on the consumers of your service and what they can support.
 
 - All Go based - Use net/rpc with `gob` encoding
 - Varied consumers - use a JSON RPC protocol like net/rpc/json
+- Special Mention - GRPC
 
 * RPC
 
