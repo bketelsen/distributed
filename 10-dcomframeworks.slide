@@ -1,0 +1,88 @@
+Frameworks and Toolkits
+
+Brian Ketelsen
+me@brianketelsen.com
+@bketelsen
+
+* Frameworks and Toolkits
+
+* When to use a framework
+
+Company Size:
+
+- Twitter, Facebook
+	
+	write your own framework
+
+- Everyone else
+
+	You should have some really unique requirements
+	if you want to spend business dollars writing a
+	microservices framework.
+
+And -- you *may* have unique requirements.  Start with these as a launching point.
+
+* Toolkits and frameworks available for distributed applications
+
+- go-kit
+- micro
+- gizmo
+- goa
+
+* go-kit
+
+`go-kit` is the brainchild of Peter Bourgon, and has many active contributors.  Rather than being a "framework" it's billed as a toolkit of composable packages that can be used to augment any distributed system.
+
+`go-kit` is very complete, and very well written. Most of the abstractions like logging/metrics support multiple providers making it easy for you to write services with abstractions for providers that can be changed later.
+
+.link src/github.com/go-kit/kit/examples/shipping Example of complex go-kit application
+* micro
+
+`micro` on the other hand, is very much a framework, providing nearly everything you need to run a full distributed micro-services architecture.  You can pick and choose among all the various pieces, but when you use them all together it makes a very compelling and fast solution to get your services to production.
+
+`micro` provides more out of the box than any other solution, with a CLI and web interface for interaction with your services.
+
+* micro
+
+Even though micro is more of a full-stack, you can still pick which backend technologies to use by using micro plugins.  
+
+- messaging
+- encoding
+- k/v store
+- metrics
+- service discovery
+- distributed locking
+- distributed tracing -- interesting potential replacement for appdash/etc.
+- network transport
+
+* micro
+
+`micro` also stands out by including infrastructure services like authentication, config, token services, user and group management.  These infrastructure services live in the `go-os` library.
+
+* gizmo
+
+`gizmo` was written by the NY Times.  It is relatively opinionated, and does a lot of work for you if you like the opinions they support.
+
+.link src/github.com/nytimes/gizmo/examples/servers/rpc Example RPC Service
+
+`gizmo` has fewer plugins/options than `micro`
+
+* goa
+
+`goa` was written by Raphael Simon from Rightscale.  In November 2015, I discovered it and jumped in with both feet contributing patches, features and plugins.  It's not really designed as a full distributed framework, but worth mentioning here because of its code generation engine.  With goa's `dslengine` package it's not too complicated to write a custom DSL to describe your microservices and then generate them from templates.
+
+`goa` 2.0 will be based on `grpc`
+
+* Exercise
+
+Explore go-micro
+
+.link https://github.com/micro/go-micro/tree/master/examples/service
+
+1.  Run the example service
+2.  Install the cli  https://github.com/micro/micro/tree/master/cli
+3.  Run the micro web dashboard https://github.com/micro/micro/tree/master/web
+4.  Explore and run the micro example services https://github.com/micro/micro/tree/master/examples using CLI and Web
+
+Together:  Run the micro slack bot: https://github.com/micro/micro/tree/master/bot
+

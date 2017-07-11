@@ -1,0 +1,136 @@
+Contexts
+
+Brian Ketelsen
+me@brianketelsen.com
+@bketelsen
+
+* Contexts
+
+* Go’s Context package
+
+Go's context package is a fundamental tool for distributed software development.
+
+- Provides a means for canceling a goroutine and *all*of*its*children*
+- Provides a place to store request specific metadata
+
+The first is important to prevent DDOS and resource drain.
+The second is useful to provide request scoped information along the call stack for a service.
+
+* Timeouts and Cancellations using Contexts
+
+Internal policy at Google is that all functions accept a context as the first parameter.
+
+Why?
+
+- Cancellation
+- Deadlines
+- Timeouts
+- Context scoped k/v retrieval & storage
+
+* Cancellation
+
+.link https://golang.org/pkg/context/#WithCancel
+
+
+- Cancellation
+
+	cd $GOPATH/src/contexts/demos/cancellation/
+	go run main.go
+
+
+-  Cancellation Walkthrough
+
+_Note_: the defer cf()
+
+* Cancellation BUG
+
+What happens if 10000 goroutines don't return the target number?
+Odds are pretty good in our favor that they will, but it could happen.
+
+What will be the result?
+
+
+* Cancellation BUG
+
+Deadlock! (forced by changing 10k to just 10)
+	
+	..........fatal error: all goroutines are asleep - deadlock!
+	goroutine 1 [select]:
+	main.Random(0x111480, 0xc420084000, 0x96, 0xa, 0x0, 0x0, 0x0)
+	/Users/bketelsen/src/github.com/gophertrain/modules/src/contexts/demos/contexts/cancellation/main.go:45 +0x308
+	main.main()
+	/Users/bketelsen/src/github.com/gophertrain/modules/src/contexts/demos/contexts/cancellation/main.go:18 +0x4f
+
+* Deadline
+
+You can fix this by providing a deadline.  Deadlines are propagated through the call chain, and are absolute.  A deadline is a fixed point in time.  
+
+	When time(X) arrives, call the cancelFunc
+
+* Deadline
+
+- Deadline Walkthrough
+
+	cd $GOPATH/src/contexts/demos/deadline/
+	go run main.go
+
+* Timeout
+
+- Deadline Walkthrough
+
+	cd $GOPATH/src/contexts/demos/timeouts/
+	go run main.go
+
+* Timeout vs. Deadline
+
+There is no practical difference between timeout and deadline.  One is a relative time, and one is an absolute time.
+
+In fact, from godoc:
+
+	WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).
+
+Use the one that feels comfortable to you.
+
+* Exercise
+
+	cd $GOPATH/src/contexts/demos
+
+Exercise:
+	Open each of the demos in the contexts directory.
+	Change the values of the loops and timeouts and experiment with the results.
+
+* Context Values
+
+You can use a context.Context as a key/value store to store and retrieve *request*specific* information.
+
+- Don't store dependencies
+- Don't store your logger, your database handle, etc
+
+- Store request/instance specific information
+
+	RequestID
+	Server processing initial request
+	Originating IP
+	Trace ID
+	Authentication Token
+
+* Context Values
+
+- Never depend on a value being present
+- Always use a default if the value isn't present, or skip that particular logic
+
+Use typed keys to avoid collision:
+
+.code contexts/includes/contexts/values/main.go /START OMIT/,/END OMIT/
+
+Now keys are scoped to the package.  Even though the "value" of the key is an integer with the value "0", it's a strongly typed value.  In this case `values.Main#RequestID` which will not collide with any other key even if the underlying integer value is also "0".
+
+* Exercise
+
+- Context RPC
+
+	cd $GOPATH/src/contexts/exercises/contextrpc/
+	go run main.go
+
+
+Follow the instructions in the Readme text file to change the RPC application to handle timeouts.

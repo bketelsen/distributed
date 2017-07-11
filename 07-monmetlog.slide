@@ -1,0 +1,121 @@
+Monitoring, Metrics, Logging
+
+Brian Ketelsen
+me@brianketelsen.com
+@bketelsen
+
+* Monitoring, Metrics, Logging
+
+
+* Determining what applications do while they run
+
+If you think debugging an application you write is hard, imagine distributing that application across a dozen microservices.  Immediately your problem has exploded into determining the interactions between dozens of services on dozens of hosts.  Without some solid instrumentation you'll be lost in a hurry..
+
+* Measuring
+
+You should capture relevant metrics for every [significant] function.
+
+You determine what "significant" means.  Probably not string manipulation, definitely anything that touches disk, network, etc.
+
+You should also capture other relevant metrics such as counts of errors per function, gauge of active connections, etc.
+
+* Measuring
+
+There are dozens of ways to capture metrics. Prometheus is the best way to capture, collect and process them.
+
+My *strong* opinion:  
+
+- if you're unsure how you'll be monitoring them, use github.com/armon/go-metrics
+- if you know you can use Prometheus, use the Go prometheus library directly
+
+armon/go-metrics will export to statsd, prometheus and others.
+
+.link https://github.com/armon/go-metrics go-metrics 
+
+* Health checks
+
+Every application should have a health check endpoint, either TCP or HTTP, that returns a known positive 
+response when called.
+
+- http:  common to have a health endpoint at /healthz
+- tcp:   Zookeeper implemented "ruok" Are You Ok?  Do similar, respond with "OK"
+
+
+* Health checks
+
+Health check should do two things:
+
+- Prove that the application is running - no response to the request is a failed health check
+- Check that the plumbing is all in place
+	database connections work
+	required services are available
+	etc.
+Any failure in the plumbing checks should trigger a failure of the health check.
+
+* Health checks
+
+Return detailed failure information in a failing health check if possible.  For http checks use an error level HTTP response code == > 500 like 502, and respond with a struct of health info in the body.
+
+* Monitoring and Alerting
+
+Monitor externally from your application.   Preferably external to the nodes your services run on as well.
+
+- prometheus alertmanager
+- datadog -- many years of experience with DD, good team, good support.  Limits on how you can get your data back out
+- grafana alerts
+- etc
+
+* Logging
+
+- Always use structured logging - logs may be parsed by a machine later, make it easy now.
+
+Recommendation:
+
+	github.com/uber-go/zap
+
+- FAST
+- Very low memory overhead / low allocations
+- HTTP Handler to allow you to change log level at RUNTIME
+- JSON or text output.  Use a flag to choose which level based on whether you're running locally or in production
+
+* Logging 
+
+Other popular options:
+
+- logrus
+- log15
+- go-kit's logger (based on log15)
+
+* Measuring & Logging
+
+Recommendation:
+
+Do these together. Wrap one of these:
+- https://github.com/golang/net/tree/master/trace 
+- https://github.com/sourcegraph/appdash
+- https://github.com/opentracing/basictracer-go
+
+and include logging.
+
+.link https://github.com/bketelsen/trace
+Use `trace` as a starting point, or a guide.  It's only good on a single service.
+
+* DEMO
+
+Demo of trace package
+
+* Exercise
+
+Instrument the raft implementation from the `consensus` module with `bketelsen/trace`.
+
+Don't do the whole thing.  Use a `trace` and an `eventlog` effectively in the `httpd` and `store`
+
+* Wrapup
+
+Your services won't scale without paying attention to all the details.
+
+- Measure
+- Monitor
+
+
+

@@ -1,0 +1,184 @@
+Distributed Architecture
+
+Brian Ketelsen
+me@brianketelsen.com
+@bketelsen
+
+* Distributed Architecture
+
+A Distributed Architecture is one that takes into account multiple servers running a conglomerated application or set of applications.  It may and often does involve more than one physical location.
+
+* Distributed Architecture
+
+This type of system brings a new set of problems to your application development.
+
+- Coordination.  Who's on first?
+- Consensus.  Does everyone have the same view of the system?
+- Scheduling.  How do you determine where to run applications, processes?
+- Storage.  If services are in different locations, how do they access common storage?
+- Service Discovery.  Where are the other things I need to communicate with?
+
+
+* Coordination
+
+- Group membership
+	Which servers are responsible for managing task X?
+- Locking
+	When only one system should execute a process how do you decide?
+- Publisher/Subscriber
+	Who is responsible for publishing, or consuming messages?
+- Ownership
+	Who owns this process, task, file, etc?
+- Synchronization
+	Run X first, then Y, when X and Y are on different nodes.
+
+* Coordination
+
+Common Tools:
+
+- Zookeeper
+- Etcd
+- Consul
+
+* Consensus
+
+Does everyone have the same view of the system?
+
+.link https://en.wikipedia.org/wiki/Consensus_(computer_science) Wikipedia
+
+	The consensus problem requires agreement among a number of processes (or agents) 
+	for a single data value. Some of the processes (agents) may fail or be unreliable 
+	in other ways, so consensus protocols must be fault tolerant or resilient. 
+	The processes must somehow put forth their candidate values, communicate with 
+	one another, and agree on a single consensus value.
+
+* Consensus
+
+Common Tools:
+
+- Zookeeper
+- Etcd
+- Consul
+
+* Scheduling
+
+How do you determine where to run your applications, processes, tasks?
+
+* Scheduling
+
+- Simple solutions
+	Bash script
+	SystemD/Init/Upstart
+
+- More control
+	Ansible/Puppet/Chef
+
+- Most control
+	Mesos/Marathon/Kubernetes/DKron
+
+* Storage
+
+If services are in different locations, how do they access common storage?
+
+- Cloud Services (Google,Rackspace,AWS, etc) use block storage
+- Everyone else has to find another solution
+	Gluster
+	Minio
+	NFS - :(
+	Pinning Services to physical machines
+	Ceph
+
+* Service Discovery
+
+Where are the other things I need to communicate with?
+
+- Service A lives on host X with IP adddress and port J:K
+- Machines 1,2,3 provide "WWW" service
+
+* Service Discovery
+
+Common Tools:
+
+- Zookeeper
+- Etcd
+- Consul
+- SkyDNS
+- mDNS (multicast DNS)
+- DNS SRV Records
+
+
+* Choosing boundaries between your applications
+
+Whether you're starting a distributed application from scratch or breaking a monolith into smaller pieces, it's difficult to decide where your boundaries are.
+
+Fortunately there are a few well proven patterns that help you decide.
+
+* Architectural patterns
+
+– Monolithic architecture
+– Three-tiered architecture
+– Request/response services
+– Nearline and offline services
+– Synchronous and asynchronous services
+– Database per service
+
+* Monolithic
+
+A monolithic architecture is one where all components live in a single application.  No boundaries to set.
+
+
+* Three Tiered Architecture
+
+- User Facing (web or UI)
+- Business Logic
+- Data Access
+
+Three tier architectures lend themselves well to distributed applications.  Even if you have more than 3 services running, you can still consider your application 3 tiered if the boundaries of the services follow these guidelines.
+
+
+* Request/Response Services
+
+Request/Response services are more loosely formed than three-tiered services.  There still has to be an endpoint where external users communicate with the aggregated service.  But a R/R architecture is defined at the microservice level, with many different services.
+
+* Nearline and Offline Services
+
+Nearline - Services that run in near real-time with your application(s)
+
+Offline - Services that run after the fact
+
+Nearline and Offline services usually require a queue of some sort to manage the work that needs to be done. 
+
+* Synchronous and Asynchronous Services
+
+Synchronous - Request and wait for a response
+
+Asynchronous - Request and get a response later, with some sort of signal that the work is complete.
+
+* Database Per Service
+
+In the Database Per Service model, each service in a distributed application has a separate database.  This is in contrast with a monolith database where one or many services talk to a single database.  The benefit of Database Per Service is scalability.  The downside is data integrity, which must be maintained without foreign keys.
+
+* Exercise 1
+
+Start a consul cluster between your three machines.
+
+.link https://hub.docker.com/r/progrium/consul/ Use progrium/consul from docker
+
+Follow the directions at https://hub.docker.com/r/progrium/consul/ to create a consul cluster between your three nodes.
+
+Explore the UI at port 8500 on one of the machines.  Set a key in the KV store and see it propagate to the other two machines.
+
+* Exercise 2
+
+Run a minio (s3 compatible) server.
+
+	docker run -v /mnt/minio:/minio -d -p 9000:9000 minio/minio:latest server /minio
+	docker logs to see access information
+	
+	edit $GOPATH/src/architecture/exercises/minio/main.go to use YOUR keys/ID
+
+	go build
+
+	./minio
+
+	browse minio at http://server.IP:9000

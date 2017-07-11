@@ -1,0 +1,75 @@
+Offline and Nearline Processing
+
+Brian Ketelsen
+me@brianketelsen.com
+@bketelsen
+
+* Offline and Nearline Processing
+
+One of the key benefits of a distributed system is the ability to ship off tasks to offline and nearline processing.  This takes these tasks `out of band` for the request cycle and speeds up response time for your services.
+
+It also allows you to scale the Offline/Nearline processing separately from the api endpoints.
+
+* Queues and communication options
+
+As we discussed at the beginning of the course, your have a lot of options for your queue/communication options.  The option you choose should be based on the requirements of your data/business needs, and the properties of the queueing systems.
+
+- If durability is required, don't use NATS.  
+- If you want the option to store work items more permanently, Kafka is an awesome choice
+- NSQ is really fast and lightweight, a good choice for most applications
+
+* Nearline asynchronous processing
+
+Nearline asynchronous processing is best used for tasks that need to happen "now", but out-of-band with the original request.
+
+Examples:
+
+- Sending emails, notifications, SMS messages
+- Audit logs
+
+* Nearline Processing
+
+Nearline processing is best configured with a queue of tasks and a pool of workers.  Scale the workers to match your required output level.  You can get surprising performance with Go's goroutines, so you may not need as many workers as you think.
+
+* Offline processing
+
+Offline processing is processing that isn't triggered by a request to your API or application.
+
+Examples:
+
+- batch processing of uploaded files/records (loading records, etc)
+- log processing 
+
+* Exercise
+
+.link src/offlineproc/exercises/nsq NSQ Nearline Processing
+
+1. Run the application as-is
+2. Modify the producer to read the contents of urls.txt and send them to the queue
+3. Run the consumer to process all the urls.
+4. Make a copy of the consumer folder to save for next steps
+5. Modify the first consumer to write results to a new topic.
+6. Modify your copy of the consumer to read results from the topic you created in step 5 and write them to a file.
+7. Run the producer and several copies of the consumer, plus one copy of the new consumer that writes to disk.
+
+_NOTE_: I downloaded this list of 9,000 URLS from the internet.  I scanned them for anything that looked inappropriate and didn't see anything.  
+
+
+
+* Helpful Go tools and libraries, blog posts
+
+* nsq
+* https://github.com/RichardKnop/machinery
+* http://marcio.io/2015/07/handling-1-million-requests-per-minute-with-golang/
+* Sarama from Shopify https://github.com/Shopify/sarama 
+
+
+* Recommendation
+
+Kafka is a completely different way of thinking about queues. 
+
+I strongly recommend learning all you can about kafka because I think it fundamentally changes the way you can architect a distributed system.
+
+.link https://www.confluent.io/blog/  Read all of these. 
+
+Rethink your architecture.

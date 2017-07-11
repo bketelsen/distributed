@@ -1,0 +1,80 @@
+Consensus
+
+Brian Ketelsen
+me@brianketelsen.com
+@bketelsen
+
+Cory LaNou
+@corylanou
+
+* Consensus
+
+References:
+.link https://en.wikipedia.org/wiki/Consensus_(computer_science) Wikipedia Consensus
+
+- Sharing a common state across systems
+- Agreeing on changes across systems
+- Distributed consensus
+- Raft, Paxos, Zab
+
+* CAP theorem
+
+- [[https://en.wikipedia.org/wiki/Consistency_(database_systems)][Consistency]]
+- [[https://en.wikipedia.org/wiki/Availability][Availability]]
+- [[https://en.wikipedia.org/wiki/Network_partition][Partition Tolerance]]
+
+References:
+.link https://en.wikipedia.org/wiki/CAP_theorem Wikipedia Cap Theorem
+
+* Building your own consensus using Go libraries
+
+.link https://raft.github.io raft
+
+We will use the HashiCorp raft library for our solution.
+
+raft is:
+- [[https://en.wikipedia.org/wiki/Consistency_(database_systems)][Consistent]]
+- [[https://en.wikipedia.org/wiki/Network_partition][Partition Tolerant]]
+- [[https://en.wikipedia.org/wiki/Byzantine_fault_tolerance][Byzantine fault tolerant]]
+
+raft is NOT:
+- [[https://en.wikipedia.org/wiki/Availability][Always Available]] (but shouldn't be a problem with proper cluster design)
+
+References:
+.link https://github.com/hashicorp/raft HashiCorp Raft Source
+.link https://godoc.org/github.com/hashicorp/raft HashiCorp Raft Documentation
+
+* Design Considerations - How many nodes?
+
+There are a lot of good articles on how many nodes to have in a consensus cluster, like the one from [[https://coreos.com/etcd/docs/latest/admin_guide.html#optimal-cluster-size][etcd]]
+
+The short version is you need at least 3 for fault tolerance, and good practice is to always use odd numbers to avoid a split vote (Byzantine failures).
+
+* Common mistakes
+
+- Reading from the finite state machine on a node that isn't the leader (this is a dirty read)
+- Not calling `raft.Barrier` before reading to ensure all pending writes have applied.
+
+* Exercise
+
+Together:
+
+Walk through 
+    src/consensus/demos/raft
+
+Run it on as single server, then as three nodes (with different ports)
+
+* Using Etcd and Consul for distributed consensus
+
+You don't have to write your own consensus system.  You can use Consul or Etcd or Zookeeper as your storage engine for state.
+
+But if you use Raft, it isn't that hard and it possibly removes a layer of complexity from your system.
+
+* Prove it works
+
+You should write your distributed software with the assumption your network is always failing.
+
+Netflix forces their development team to address this:
+
+.link https://github.com/Netflix/SimianArmy/wiki/Chaos-Monkey Chaos Monkey (now written in go - see below)
+.link https://github.com/Netflix/chaosmonkey new chaos monkey
