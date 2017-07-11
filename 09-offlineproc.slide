@@ -14,7 +14,7 @@ It also allows you to scale the Offline/Nearline processing separately from the 
 
 As we discussed at the beginning of the course, your have a lot of options for your queue/communication options.  The option you choose should be based on the requirements of your data/business needs, and the properties of the queueing systems.
 
-- If durability is required, don't use NATS.  
+- If durability is required, don't use NATS.
 - If you want the option to store work items more permanently, Kafka is an awesome choice
 - NSQ is really fast and lightweight, a good choice for most applications
 
@@ -38,7 +38,7 @@ Offline processing is processing that isn't triggered by a request to your API o
 Examples:
 
 - batch processing of uploaded files/records (loading records, etc)
-- log processing 
+- log processing
 
 * Exercise
 

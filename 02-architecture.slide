@@ -105,6 +105,7 @@ Common Tools:
 - SkyDNS
 - mDNS (multicast DNS)
 - DNS SRV Records
+- Istio (newcomer)
 
 
 * Choosing boundaries between your applications

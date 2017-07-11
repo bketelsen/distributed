@@ -21,7 +21,7 @@ Mesos/Marathon are a good choice if you have to deploy mixed workloads -- mixing
 
 .link http://mesos.apache.org mesos
 
-* DCOS 
+* DCOS
 
 Free/commercial version of nicely packaged Mesos/marathon & more
 

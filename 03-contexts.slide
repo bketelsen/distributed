@@ -53,7 +53,7 @@ What will be the result?
 * Cancellation BUG
 
 Deadlock! (forced by changing 10k to just 10)
-	
+
 	..........fatal error: all goroutines are asleep - deadlock!
 	goroutine 1 [select]:
 	main.Random(0x111480, 0xc420084000, 0x96, 0xa, 0x0, 0x0, 0x0)
@@ -63,7 +63,7 @@ Deadlock! (forced by changing 10k to just 10)
 
 * Deadline
 
-You can fix this by providing a deadline.  Deadlines are propagated through the call chain, and are absolute.  A deadline is a fixed point in time.  
+You can fix this by providing a deadline.  Deadlines are propagated through the call chain, and are absolute.  A deadline is a fixed point in time.
 
 	When time(X) arrives, call the cancelFunc
 

@@ -26,7 +26,7 @@ In the message queue pattern, a service on the network sends a message on a queu
 
 - RabbitMQ
 - NATS
-- NSQ 
+- NSQ
 - countless others
 
 * Message Queue Pros/Cons
@@ -47,7 +47,7 @@ Cons:
 
 * Exercise
 
-Message Queue 
+Message Queue
 
 - $GOPATH/src/dcom/exercises/onenode/readme.txt
 - $GOPATH/src/dcom/exercises/logger/readme.txt
@@ -119,7 +119,7 @@ Old clients will continue to work, and new clients can use newer fields.  Server
 		required string name = 1;
 		required int32 id = 2;
 		optional string email = 3;
-	} 
+	}
 
 Messages are strongly typed (unlike JSON), and there is a rich definition language for custom message types, optional fields, enumerations and more.
 

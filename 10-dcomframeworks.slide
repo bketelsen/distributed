@@ -11,7 +11,7 @@ me@brianketelsen.com
 Company Size:
 
 - Twitter, Facebook
-	
+
 	write your own framework
 
 - Everyone else
@@ -44,7 +44,7 @@ And -- you *may* have unique requirements.  Start with these as a launching poin
 
 * micro
 
-Even though micro is more of a full-stack, you can still pick which backend technologies to use by using micro plugins.  
+Even though micro is more of a full-stack, you can still pick which backend technologies to use by using micro plugins.
 
 - messaging
 - encoding

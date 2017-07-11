@@ -50,7 +50,7 @@ Cons:
 - When using DNS to lookup, requires more configuration
 - When using API to lookup, requires more code
 
-Example: Consul, SkyDNS, Zookeeper, Kubernetes Services
+Example: Consul, SkyDNS, Zookeeper, Kubernetes Services, Istio
 
 * Dynamically generated static configuration
 
@@ -63,8 +63,10 @@ Cons:
 - Requires a dynamic SD mechanism, and another tool to watch config values and regenerate config from a template
 - Requires a service watchdog to restart the service when configs change
 
-Example:  
+Example:
 .link https://github.com/kelseyhightower/confd confd
+
+
 
 * Hybrid
 

@@ -23,14 +23,14 @@ You should also capture other relevant metrics such as counts of errors per func
 
 There are dozens of ways to capture metrics. Prometheus is the best way to capture, collect and process them.
 
-My *strong* opinion:  
+My *strong* opinion:
 
 - if you're unsure how you'll be monitoring them, use github.com/armon/go-metrics
 - if you know you can use Prometheus, use the Go prometheus library directly
 
 armon/go-metrics will export to statsd, prometheus and others.
 
-.link https://github.com/armon/go-metrics go-metrics 
+.link https://github.com/armon/go-metrics go-metrics
 
 * Health checks
 
@@ -78,7 +78,7 @@ Recommendation:
 - HTTP Handler to allow you to change log level at RUNTIME
 - JSON or text output.  Use a flag to choose which level based on whether you're running locally or in production
 
-* Logging 
+* Logging
 
 Other popular options:
 
@@ -91,7 +91,7 @@ Other popular options:
 Recommendation:
 
 Do these together. Wrap one of these:
-- https://github.com/golang/net/tree/master/trace 
+- https://github.com/golang/net/tree/master/trace
 - https://github.com/sourcegraph/appdash
 - https://github.com/opentracing/basictracer-go
 

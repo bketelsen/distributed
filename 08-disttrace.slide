@@ -78,7 +78,7 @@ Lightstep is a new commercial offering that accepts OpenTracing collections and 
 
 .link http://lightstep.com lightstep
 
-* Appdash 
+* Appdash
 
 Appdash is an open source tracing system written by Source Graph.  It is easy to run and is also written in Go.
 
