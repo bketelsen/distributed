@@ -1,5 +1,6 @@
 bin/
 pkg/
+src/google.golang.org
 src/github.com/
 src/sourcegraph.com/
 src/gopkg.in/
