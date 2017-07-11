@@ -30,11 +30,11 @@
 You have two choices for working with this repository:
 
 * You can use vagrant/virtualbox
-* You can have a Go 1.7 installation on your computer 
+* You can have a Go 1.8 installation on your computer 
 
 If you are using Vagrant/Virtualbox, you need to install VirtualBox first, then Vagrant.
 
-If you have Go 1.7 installed, you'll need to set your GOPATH to the root of this repository.  You can do that manually, or use `direnv`. I strongly recommend using `direnv`!  See below for instructions.
+If you have Go 1.8 installed, you'll need to set your GOPATH to the root of this repository.  You can do that manually, or use `direnv`. I strongly recommend using `direnv`!  See below for instructions.
 
 
 

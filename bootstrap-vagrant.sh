@@ -11,8 +11,8 @@ export GOPATH=/home/vagrant
 echo Installing Go
 cd /tmp
 curl -s -O https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.7.linux-amd64.tar.gz
-rm /tmp/go1.7.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
+rm /tmp/go1.8.3.linux-amd64.tar.gz
 
 
 echo Setting GOPATH and PATH
