@@ -1,7 +1,7 @@
 Distributed Communication
 
 Brian Ketelsen
-me@brianketelsen.com
+bketelsen@gmail.com
 @bketelsen
 
 * Distributed Communication
@@ -159,7 +159,4 @@ Open $GOPATH/src/google.golang.org/grpc/examples/helloworld in two different ter
 Inspect the source code for the client and the server.
 
 Individually:  Run the server, then from another terminal run the client. (Use the same machine for both.)
-
-
-
 

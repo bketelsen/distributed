@@ -4,6 +4,7 @@ This is a basic example of a key value store using raft as the consensus layer.
 
 ## How to start your cluster:
 
+Install dependencies with `dep ensure`
 
 ### Start your first node:
 ```sh

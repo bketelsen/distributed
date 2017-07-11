@@ -7,6 +7,10 @@ Get the token/accessKey
 	docker ps (get minio container id)
 	docker logs (minio container id)
 
+Install dependencies:
+
+    dep ensure
+
 Run a Go app to talk to minio:
 
 	edit $GOPATH/src/architecture/exampmles/minio/main.go to use YOUR keys/ID
