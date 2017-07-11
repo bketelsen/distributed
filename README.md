@@ -38,36 +38,6 @@ If you have Go 1.8 installed, you'll need to set your GOPATH to the root of this
 
 
 
-## Vagrant Usage
-
-The vagrant setup in this repository will share the `src` directory to /home/vagrant/src and set your GOPATH in the virtual machine to `/home/vagrant`.
-
-It also adds `/home/vagrant/bin` to your $PATH so that any executables that you build or install will be in your path when you're working inside the VM.
-
-###  Starting
-
-	vagrant up
-
-### Entering the VM
-	
-	vagrant ssh
-
-### Shared Directories & Editing
-
-The `src` directory of this repo is available inside the VM as `/home/vagrant/src`.  Changes you make on your host computer will be available inside the vm immediately.  This means that you can edit using your favorite text editor (Sublime Text, Atom, Visual Studio Code, {neo}Vim, Emacs, etc) but use the vagrant ssh session to compile and run.
-
-### Testing Vagrant Setup
-
-	vagrant ssh
-	go install hello
-
-This should compile the `hello/main.go` file at `/home/vagrant/src/hello/main.go`
-
-	go install hello
-	hello
-
-This should compile and install the hello app, then run it.  
-
 
 ## Local Setup
 
@@ -79,7 +49,7 @@ Test this by building the `hello` package:
 
 	go install hello
 
-Building packages and binaries will put compiled output in the `bin` and `pkg` directories.  
+Building packages and binaries will put compiled output in the `bin` and `pkg` directories.
 
 Add `bin` to your PATH:
 
@@ -87,19 +57,19 @@ Add `bin` to your PATH:
 
 Test this by running `hello`.
 
-There is an `environment.sh` file in the root of the course directory that will setup your GOPATH for 
+There is an `environment.sh` file in the root of the course directory that will setup your GOPATH for
 the current terminal session if you type:
 	
 	source ./environment.sh
 
 You will need to do this each time you create a new shell.  Alternatively, you can use `direnv`, a useful utility
-that will read and source the contents of an `.envrc` file each time you enter a directory.  
+that will read and source the contents of an `.envrc` file each time you enter a directory.
 
 ## DIRENV Setup
 
 These training materials are expected to be a standalone GOPATH.  You can make your life easy by installing `direnv`.  `direnv` must be located somewhere in your $PATH to work.  My suggestion is to add the `bin` directory of your $GOPATH to your path if you haven't already.
 
-For bash, modify ~/.bashrc so that $GOPATH/bin is in your binary search path:
+For bash, modify ~/.bashrc (or .bash_profile on Mac) so that $GOPATH/bin is in your binary search path:
 
 	export PATH=$GOPATH/bin:$PATH
 
@@ -112,7 +82,7 @@ has its own extension mechanism:
 
 ### BASH
 
-Add the following line at the end of the "~/.bashrc" file:
+Add the following line at the end of the "~/.bashrc" or "~/.bash_profile" file:
 
 ```sh
 eval "$(direnv hook bash)"
@@ -148,9 +118,45 @@ eval `direnv hook tcsh`
 ### Restart Shell
 
 After making any of these modifications, close and reopen your shell session.
+You can also just reload your preferences by using the `source` command:
+
+```sh
+source .bashrc
+```
 
 The first time you enter a directory with an `.envrc` file you'll be prompted to allow direnv to make changes to your environment.
 
+
+
+## Vagrant Usage
+
+The vagrant setup in this repository will share the `src` directory to /home/vagrant/src and set your GOPATH in the virtual machine to `/home/vagrant`.
+
+It also adds `/home/vagrant/bin` to your $PATH so that any executables that you build or install will be in your path when you're working inside the VM.
+
+###  Starting
+
+	vagrant up
+
+### Entering the VM
+
+	vagrant ssh
+
+### Shared Directories & Editing
+
+The `src` directory of this repo is available inside the VM as `/home/vagrant/src`.  Changes you make on your host computer will be available inside the vm immediately.  This means that you can edit using your favorite text editor (Sublime Text, Atom, Visual Studio Code, {neo}Vim, Emacs, etc) but use the vagrant ssh session to compile and run.
+
+### Testing Vagrant Setup
+
+	vagrant ssh
+	go install hello
+
+This should compile the `hello/main.go` file at `/home/vagrant/src/hello/main.go`
+
+	go install hello
+	hello
+
+This should compile and install the hello app, then run it.
 
 
 
