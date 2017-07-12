@@ -9,7 +9,7 @@ Start a single consul node:
 
 $ docker run -p 8400:8400 -p 8500:8500 -p 8600:53/udp -h `hostname` progrium/consul -server -bootstrap -ui-dir /ui
 
-(This may not work for you if you're running older docker for mac. //FIXME with new instructions there.)
+Alternately you can `go get` consul and run it locally.
 
 Register the service in consul:
 

@@ -75,3 +75,5 @@ The truth of the matter is you'll need more than one of these in a complex syste
 * Exercise
 
 .link src/disco/exercises/contextrpc/README.md
+
+Modify the client to use the consul API to discover the available instances of the service before making the RPC request.
