@@ -63,7 +63,7 @@ Even though micro is more of a full-stack, you can still pick which backend tech
 
 `gizmo` was written by the NY Times.  It is relatively opinionated, and does a lot of work for you if you like the opinions they support.
 
-.link src/github.com/nytimes/gizmo/examples/servers/rpc Example RPC Service
+.link https://github.com/NYTimes/gizmo/tree/master/examples/servers/rpc Example RPC Service
 
 `gizmo` has fewer plugins/options than `micro`
 
@@ -77,12 +77,12 @@ Even though micro is more of a full-stack, you can still pick which backend tech
 
 Explore go-micro
 
-.link https://github.com/micro/go-micro/tree/master/examples/service
+.link https://github.com/micro/examples/tree/master/service
 
 1.  Run the example service
-2.  Install the cli  https://github.com/micro/micro/tree/master/cli
-3.  Run the micro web dashboard https://github.com/micro/micro/tree/master/web
-4.  Explore and run the micro example services https://github.com/micro/micro/tree/master/examples using CLI and Web
+2.  Install the cli [[https://github.com/micro/micro/tree/master/cli]]
+3.  Run the micro web dashboard [[https://github.com/micro/micro/tree/master/web]]
+4.  Explore and run the micro example services [[https://github.com/micro/examples/tree/master/service]] using CLI and Web
 
-Together:  Run the micro slack bot: https://github.com/micro/micro/tree/master/bot
+Together:  Run the micro slack bot: [[https://github.com/micro/micro/tree/master/bot]]
 

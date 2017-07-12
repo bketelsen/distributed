@@ -27,7 +27,7 @@ var joinAddr string
 func init() {
 	flag.StringVar(&httpAddr, "httpaddr", defaultHTTPAddr, "Set the HTTP bind address")
 	flag.StringVar(&raftAddr, "raftaddr", defaultRaftAddr, "Set Raft bind address")
-	flag.StringVar(&joinAddr, "join", "", "[optional] The address of a node to join.  Leave empty to boostrap your first node.")
+	flag.StringVar(&joinAddr, "join", "", "[optional] The address of a node to join.  Leave empty to bootstrap your first node.")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options] <raft-data-path> \n", os.Args[0])
 		flag.PrintDefaults()

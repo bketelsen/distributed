@@ -26,7 +26,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// Make a new bucked
+	// Make a new bucket
 	bucketName := "gophertrain"
 	location := "us-east-1"
 
