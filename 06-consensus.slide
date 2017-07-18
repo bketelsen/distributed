@@ -59,7 +59,7 @@ The short version is you need at least 3 for fault tolerance, and good practice 
 
 Together:
 
-Walk throug 
+Walk through
     src/consensus/demos/raft
 
 Run it on as single server, then as three nodes (with different ports)

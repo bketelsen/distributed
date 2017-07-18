@@ -111,7 +111,7 @@ Protocol Buffers use numbered fields in their message definitions, which guarant
 - You never modify existing fields
 - But you may add more fields to a message
 
-Old clients will continue to work, and new clients can use newer fields.  Server-side code is epected to handle both gracefully.
+Old clients will continue to work, and new clients can use newer fields.  Server-side code is expected to handle both gracefully.
 
 
 * Protocol Buffers
